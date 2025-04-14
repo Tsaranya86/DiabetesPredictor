@@ -146,3 +146,5 @@ print(f"Random Forest: Accuracy = {rf_accuracy:.2f}, RMSE = {rf_rmse:.2f}")
 print("Accuracy shows the percentage of correct diabetes predictions.")
 print("RMSE measures the error between predicted probabilities and true labels (0 or 1).")
 print("Random Forest often outperforms Logistic Regression due to its ability to capture complex patterns.")
+
+#run fine checked by Jae Cho
