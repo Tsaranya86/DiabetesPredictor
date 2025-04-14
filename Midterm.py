@@ -42,7 +42,7 @@ print("Shape after removing duplicates:", df.shape)
 le_gender = LabelEncoder()
 df['gender'] = le_gender.fit_transform(df['gender'])
 le_smoking = LabelEncoder()
-df['smoking_history'] = le_smoking.fit_transform(df['smoking_history'])
+df['smoking_history'] = le_smoking.fit_transform(df['smoking_history !!'])
 print("\nGender encoding:", dict(zip(le_gender.classes_, le_gender.transform(le_gender.classes_))))
 print("Smoking history encoding:", dict(zip(le_smoking.classes_, le_smoking.transform(le_smoking.classes_))))
  
@@ -53,6 +53,7 @@ numerical_cols = ['age', 'bmi', 'HbA1c_level', 'blood_glucose_level']
 # Separate features and target
 X = df.drop(columns=['diabetes'])
 y = df['diabetes']
+
  
 # No scaling applied (Random Forest doesn't need it; Logistic Regression can work without for simplicity)
  
@@ -103,7 +104,40 @@ plt.xlabel("Blood Glucose Level")
 plt.ylabel("HbA1c Level")
 plt.legend(title='Diabetes', labels=['No (0)', 'Yes (1)'])
 plt.show()
+
+# Set visual style
+sns.set(style="whitegrid")
  
+# 1. Distribution of Age
+plt.figure(figsize=(8, 5))
+sns.histplot(df['age'], bins=40, kde=True)
+plt.title("Age Distribution")
+plt.xlabel("Age")
+plt.ylabel("Count")
+plt.show()
+ 
+# 2. Diabetes Rate by Gender
+plt.figure(figsize=(6, 4))
+sns.barplot(x='gender', y='diabetes', data=df)
+plt.title("Diabetes Rate by Gender")
+plt.ylabel("Diabetes Rate")
+plt.show()
+ 
+# 3. Diabetes Rate by Smoking History
+plt.figure(figsize=(10, 5))
+sns.barplot(x='smoking_history', y='diabetes', data=df)
+plt.title("Diabetes Rate by Smoking History")
+plt.ylabel("Diabetes Rate")
+plt.xticks(rotation=45)
+plt.show()
+ 
+# 4. Correlation Heatmap
+plt.figure(figsize=(8, 6))
+numeric_df = df.select_dtypes(include=['float64', 'int64'])
+corr = numeric_df.corr()
+sns.heatmap(corr, annot=True, cmap='coolwarm', fmt='.2f')
+plt.title("Feature Correlation Heatmap")
+
 # ------------------------------------------------------------------------------
 # 2.3 Build and Evaluate a Machine Learning Model
 # ------------------------------------------------------------------------------
@@ -146,3 +180,5 @@ print(f"Random Forest: Accuracy = {rf_accuracy:.2f}, RMSE = {rf_rmse:.2f}")
 print("Accuracy shows the percentage of correct diabetes predictions.")
 print("RMSE measures the error between predicted probabilities and true labels (0 or 1).")
 print("Random Forest often outperforms Logistic Regression due to its ability to capture complex patterns.")
+
+#run fine checked by Jae Cho
