@@ -117,7 +117,7 @@ plt.xlabel("Age")
 plt.ylabel("Count")
 plt.show()
  
-# 2. Diabetes Rate by Gender
+# 2. Diabetes Rate by Gender Identification
 plt.figure(figsize=(6, 4))
 sns.barplot(x='gender', y='diabetes', data=df)
 plt.title("Diabetes Rate by Gender")
